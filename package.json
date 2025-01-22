@@ -47,7 +47,8 @@
     "@jpfulton/license-auditor-common": "^0.0.8",
     "commander": "^11.0.0",
     "node-fetch": "^2.0.0",
-    "node-html-parser": "^6.1.10"
+    "node-html-parser": "^6.1.10",
+    "yaml": "^2.7.0"
   },
   "scripts": {
     "build": "yarn build:cjs && yarn build:types",
