@@ -1,0 +1,519 @@
+{
+    "dependencies": [
+        {
+            "moduleName": "ch.qos.logback.contrib:logback-json-classic",
+            "moduleVersion": "0.1.5",
+            "moduleLicense": "GNU LESSER GENERAL PUBLIC LICENSE, Version 2.1",
+            "moduleLicenseUrl": "https://www.gnu.org/licenses/lgpl-2.1"
+        },
+        {
+            "moduleName": "ch.qos.logback.contrib:logback-json-core",
+            "moduleVersion": "0.1.5",
+            "moduleLicense": "GNU LESSER GENERAL PUBLIC LICENSE, Version 2.1",
+            "moduleLicenseUrl": "https://www.gnu.org/licenses/lgpl-2.1"
+        },
+        {
+            "moduleName": "ch.qos.logback:logback-classic",
+            "moduleUrl": "http://www.qos.ch",
+            "moduleVersion": "1.3.11",
+            "moduleLicense": "GNU LESSER GENERAL PUBLIC LICENSE, Version 2.1",
+            "moduleLicenseUrl": "https://www.gnu.org/licenses/lgpl-2.1"
+        },
+        {
+            "moduleName": "ch.qos.logback:logback-core",
+            "moduleUrl": "http://www.qos.ch",
+            "moduleVersion": "1.3.11",
+            "moduleLicense": "GNU LESSER GENERAL PUBLIC LICENSE, Version 2.1",
+            "moduleLicenseUrl": "https://www.gnu.org/licenses/lgpl-2.1"
+        },
+        {
+            "moduleName": "com.azure:azure-core",
+            "moduleUrl": "https://github.com/Azure/azure-sdk-for-java",
+            "moduleVersion": "1.43.0",
+            "moduleLicense": "MIT License",
+            "moduleLicenseUrl": "https://opensource.org/licenses/MIT"
+        },
+        {
+            "moduleName": "com.azure:azure-core-http-netty",
+            "moduleUrl": "https://github.com/Azure/azure-sdk-for-java",
+            "moduleVersion": "1.13.7",
+            "moduleLicense": "MIT License",
+            "moduleLicenseUrl": "https://opensource.org/licenses/MIT"
+        },
+        {
+            "moduleName": "com.azure:azure-identity",
+            "moduleUrl": "https://github.com/Azure/azure-sdk-for-java",
+            "moduleVersion": "1.10.1",
+            "moduleLicense": "MIT License",
+            "moduleLicenseUrl": "https://opensource.org/licenses/MIT"
+        },
+        {
+            "moduleName": "com.azure:azure-json",
+            "moduleUrl": "https://github.com/Azure/azure-sdk-for-java",
+            "moduleVersion": "1.1.0",
+            "moduleLicense": "MIT License",
+            "moduleLicenseUrl": "https://opensource.org/licenses/MIT"
+        },
+        {
+            "moduleName": "com.azure:azure-monitor-opentelemetry-exporter",
+            "moduleVersion": "1.0.0-beta.11",
+            "moduleLicense": "MIT License",
+            "moduleLicenseUrl": "https://opensource.org/licenses/MIT"
+        },
+        {
+            "moduleName": "com.azure:azure-storage-blob",
+            "moduleUrl": "https://github.com/Azure/azure-sdk-for-java",
+            "moduleVersion": "12.24.0",
+            "moduleLicense": "MIT License",
+            "moduleLicenseUrl": "https://opensource.org/licenses/MIT"
+        },
+        {
+            "moduleName": "com.azure:azure-storage-common",
+            "moduleUrl": "https://github.com/Azure/azure-sdk-for-java",
+            "moduleVersion": "12.23.0",
+            "moduleLicense": "MIT License",
+            "moduleLicenseUrl": "https://opensource.org/licenses/MIT"
+        },
+        {
+            "moduleName": "com.azure:azure-storage-internal-avro",
+            "moduleUrl": "https://github.com/Azure/azure-sdk-for-java",
+            "moduleVersion": "12.9.0",
+            "moduleLicense": "MIT License",
+            "moduleLicenseUrl": "https://opensource.org/licenses/MIT"
+        },
+        {
+            "moduleName": "com.fasterxml.jackson.core:jackson-annotations",
+            "moduleUrl": "https://github.com/FasterXML/jackson",
+            "moduleVersion": "2.15.2",
+            "moduleLicense": "Apache License, Version 2.0",
+            "moduleLicenseUrl": "https://www.apache.org/licenses/LICENSE-2.0"
+        },
+        {
+            "moduleName": "com.fasterxml.jackson.core:jackson-core",
+            "moduleUrl": "https://github.com/FasterXML/jackson-core",
+            "moduleVersion": "2.15.2",
+            "moduleLicense": "Apache License, Version 2.0",
+            "moduleLicenseUrl": "https://www.apache.org/licenses/LICENSE-2.0"
+        },
+        {
+            "moduleName": "com.fasterxml.jackson.core:jackson-databind",
+            "moduleUrl": "https://github.com/FasterXML/jackson",
+            "moduleVersion": "2.15.2",
+            "moduleLicense": "Apache License, Version 2.0",
+            "moduleLicenseUrl": "https://www.apache.org/licenses/LICENSE-2.0"
+        },
+        {
+            "moduleName": "com.fasterxml.jackson.datatype:jackson-datatype-jsr310",
+            "moduleUrl": "https://github.com/FasterXML/jackson-modules-java8/jackson-datatype-jsr310",
+            "moduleVersion": "2.15.2",
+            "moduleLicense": "Apache License, Version 2.0",
+            "moduleLicenseUrl": "https://www.apache.org/licenses/LICENSE-2.0"
+        },
+        {
+            "moduleName": "com.github.oshi:oshi-core",
+            "moduleUrl": "https://github.com/oshi/oshi/oshi-core",
+            "moduleVersion": "6.4.6",
+            "moduleLicense": "MIT License",
+            "moduleLicenseUrl": "https://opensource.org/licenses/MIT"
+        },
+        {
+            "moduleName": "com.github.spotbugs:spotbugs-annotations",
+            "moduleUrl": "https://spotbugs.github.io/",
+            "moduleVersion": "4.7.3",
+            "moduleLicense": "GNU LESSER GENERAL PUBLIC LICENSE, Version 2.1",
+            "moduleLicenseUrl": "https://www.gnu.org/licenses/lgpl-2.1"
+        },
+        {
+            "moduleName": "com.github.stephenc.jcip:jcip-annotations",
+            "moduleUrl": "http://stephenc.github.com/jcip-annotations",
+            "moduleVersion": "1.0-1",
+            "moduleLicense": "Apache License, Version 2.0",
+            "moduleLicenseUrl": "https://www.apache.org/licenses/LICENSE-2.0"
+        },
+        {
+            "moduleName": "com.google.code.findbugs:jsr305",
+            "moduleUrl": "http://findbugs.sourceforge.net/",
+            "moduleVersion": "3.0.2",
+            "moduleLicense": "Apache License, Version 2.0",
+            "moduleLicenseUrl": "https://www.apache.org/licenses/LICENSE-2.0"
+        },
+        {
+            "moduleName": "com.google.errorprone:error_prone_annotations",
+            "moduleUrl": "https://errorprone.info/error_prone_annotations",
+            "moduleVersion": "2.22.0",
+            "moduleLicense": "Apache License, Version 2.0",
+            "moduleLicenseUrl": "https://www.apache.org/licenses/LICENSE-2.0"
+        },
+        {
+            "moduleName": "com.microsoft.azure:msal4j",
+            "moduleUrl": "https://github.com/AzureAD/microsoft-authentication-library-for-java",
+            "moduleVersion": "1.13.9",
+            "moduleLicense": "MIT License",
+            "moduleLicenseUrl": "https://opensource.org/licenses/MIT"
+        },
+        {
+            "moduleName": "com.microsoft.azure:msal4j-persistence-extension",
+            "moduleUrl": "https://github.com/AzureAD/microsoft-authentication-extensions-for-java",
+            "moduleVersion": "1.2.0",
+            "moduleLicense": "MIT License",
+            "moduleLicenseUrl": "https://opensource.org/licenses/MIT"
+        },
+        {
+            "moduleName": "com.microsoft.jfr:jfr-streaming",
+            "moduleUrl": "https://github.com/Microsoft/jfr-streaming",
+            "moduleVersion": "1.2.0",
+            "moduleLicense": "MIT License",
+            "moduleLicenseUrl": "https://opensource.org/licenses/MIT"
+        },
+        {
+            "moduleName": "com.nimbusds:content-type",
+            "moduleUrl": "https://connect2id.com",
+            "moduleVersion": "2.2",
+            "moduleLicense": "Apache License, Version 2.0",
+            "moduleLicenseUrl": "https://www.apache.org/licenses/LICENSE-2.0"
+        },
+        {
+            "moduleName": "com.nimbusds:lang-tag",
+            "moduleUrl": "https://connect2id.com/",
+            "moduleVersion": "1.7",
+            "moduleLicense": "Apache License, Version 2.0",
+            "moduleLicenseUrl": "https://www.apache.org/licenses/LICENSE-2.0"
+        },
+        {
+            "moduleName": "com.nimbusds:nimbus-jose-jwt",
+            "moduleUrl": "https://connect2id.com",
+            "moduleVersion": "9.30.2",
+            "moduleLicense": "Apache License, Version 2.0",
+            "moduleLicenseUrl": "https://www.apache.org/licenses/LICENSE-2.0"
+        },
+        {
+            "moduleName": "com.nimbusds:oauth2-oidc-sdk",
+            "moduleUrl": "https://bitbucket.org/connect2id/oauth-2.0-sdk-with-openid-connect-extensions",
+            "moduleVersion": "10.7.1",
+            "moduleLicense": "Apache License, Version 2.0",
+            "moduleLicenseUrl": "https://www.apache.org/licenses/LICENSE-2.0"
+        },
+        {
+            "moduleName": "commons-codec:commons-codec",
+            "moduleUrl": "https://commons.apache.org/proper/commons-codec/",
+            "moduleVersion": "1.16.0",
+            "moduleLicense": "Apache License, Version 2.0",
+            "moduleLicenseUrl": "https://www.apache.org/licenses/LICENSE-2.0"
+        },
+        {
+            "moduleName": "io.netty:netty-buffer",
+            "moduleUrl": "https://netty.io/",
+            "moduleVersion": "4.1.99.Final",
+            "moduleLicense": "Apache License, Version 2.0",
+            "moduleLicenseUrl": "https://www.apache.org/licenses/LICENSE-2.0"
+        },
+        {
+            "moduleName": "io.netty:netty-codec",
+            "moduleUrl": "https://netty.io/",
+            "moduleVersion": "4.1.99.Final",
+            "moduleLicense": "Apache License, Version 2.0",
+            "moduleLicenseUrl": "https://www.apache.org/licenses/LICENSE-2.0"
+        },
+        {
+            "moduleName": "io.netty:netty-codec-dns",
+            "moduleUrl": "https://netty.io/",
+            "moduleVersion": "4.1.99.Final",
+            "moduleLicense": "Apache License, Version 2.0",
+            "moduleLicenseUrl": "https://www.apache.org/licenses/LICENSE-2.0"
+        },
+        {
+            "moduleName": "io.netty:netty-codec-http",
+            "moduleUrl": "https://netty.io/",
+            "moduleVersion": "4.1.99.Final",
+            "moduleLicense": "Apache License, Version 2.0",
+            "moduleLicenseUrl": "https://www.apache.org/licenses/LICENSE-2.0"
+        },
+        {
+            "moduleName": "io.netty:netty-codec-http2",
+            "moduleUrl": "https://netty.io/",
+            "moduleVersion": "4.1.99.Final",
+            "moduleLicense": "Apache License, Version 2.0",
+            "moduleLicenseUrl": "https://www.apache.org/licenses/LICENSE-2.0"
+        },
+        {
+            "moduleName": "io.netty:netty-codec-socks",
+            "moduleUrl": "https://netty.io/",
+            "moduleVersion": "4.1.99.Final",
+            "moduleLicense": "Apache License, Version 2.0",
+            "moduleLicenseUrl": "https://www.apache.org/licenses/LICENSE-2.0"
+        },
+        {
+            "moduleName": "io.netty:netty-common",
+            "moduleUrl": "https://netty.io/",
+            "moduleVersion": "4.1.99.Final",
+            "moduleLicense": "Apache License, Version 2.0",
+            "moduleLicenseUrl": "https://www.apache.org/licenses/LICENSE-2.0"
+        },
+        {
+            "moduleName": "io.netty:netty-handler",
+            "moduleUrl": "https://netty.io/",
+            "moduleVersion": "4.1.99.Final",
+            "moduleLicense": "Apache License, Version 2.0",
+            "moduleLicenseUrl": "https://www.apache.org/licenses/LICENSE-2.0"
+        },
+        {
+            "moduleName": "io.netty:netty-handler-proxy",
+            "moduleUrl": "https://netty.io/",
+            "moduleVersion": "4.1.99.Final",
+            "moduleLicense": "Apache License, Version 2.0",
+            "moduleLicenseUrl": "https://www.apache.org/licenses/LICENSE-2.0"
+        },
+        {
+            "moduleName": "io.netty:netty-resolver",
+            "moduleUrl": "https://netty.io/",
+            "moduleVersion": "4.1.99.Final",
+            "moduleLicense": "Apache License, Version 2.0",
+            "moduleLicenseUrl": "https://www.apache.org/licenses/LICENSE-2.0"
+        },
+        {
+            "moduleName": "io.netty:netty-resolver-dns",
+            "moduleUrl": "https://netty.io/",
+            "moduleVersion": "4.1.99.Final",
+            "moduleLicense": "Apache License, Version 2.0",
+            "moduleLicenseUrl": "https://www.apache.org/licenses/LICENSE-2.0"
+        },
+        {
+            "moduleName": "io.netty:netty-resolver-dns-classes-macos",
+            "moduleUrl": "https://netty.io/",
+            "moduleVersion": "4.1.99.Final",
+            "moduleLicense": "Apache License, Version 2.0",
+            "moduleLicenseUrl": "https://www.apache.org/licenses/LICENSE-2.0"
+        },
+        {
+            "moduleName": "io.netty:netty-resolver-dns-native-macos",
+            "moduleUrl": "https://netty.io/",
+            "moduleVersion": "4.1.99.Final",
+            "moduleLicense": "Apache License, Version 2.0",
+            "moduleLicenseUrl": "https://www.apache.org/licenses/LICENSE-2.0"
+        },
+        {
+            "moduleName": "io.netty:netty-tcnative-boringssl-static",
+            "moduleUrl": "https://netty.io/",
+            "moduleVersion": "2.0.61.Final",
+            "moduleLicense": "Apache License, Version 2.0",
+            "moduleLicenseUrl": "https://www.apache.org/licenses/LICENSE-2.0"
+        },
+        {
+            "moduleName": "io.netty:netty-tcnative-classes",
+            "moduleUrl": "https://netty.io/",
+            "moduleVersion": "2.0.61.Final",
+            "moduleLicense": "Apache License, Version 2.0",
+            "moduleLicenseUrl": "https://www.apache.org/licenses/LICENSE-2.0"
+        },
+        {
+            "moduleName": "io.netty:netty-transport",
+            "moduleUrl": "https://netty.io/",
+            "moduleVersion": "4.1.99.Final",
+            "moduleLicense": "Apache License, Version 2.0",
+            "moduleLicenseUrl": "https://www.apache.org/licenses/LICENSE-2.0"
+        },
+        {
+            "moduleName": "io.netty:netty-transport-classes-epoll",
+            "moduleUrl": "https://netty.io/",
+            "moduleVersion": "4.1.99.Final",
+            "moduleLicense": "Apache License, Version 2.0",
+            "moduleLicenseUrl": "https://www.apache.org/licenses/LICENSE-2.0"
+        },
+        {
+            "moduleName": "io.netty:netty-transport-classes-kqueue",
+            "moduleUrl": "https://netty.io/",
+            "moduleVersion": "4.1.99.Final",
+            "moduleLicense": "Apache License, Version 2.0",
+            "moduleLicenseUrl": "https://www.apache.org/licenses/LICENSE-2.0"
+        },
+        {
+            "moduleName": "io.netty:netty-transport-native-epoll",
+            "moduleUrl": "https://netty.io/",
+            "moduleVersion": "4.1.99.Final",
+            "moduleLicense": "Apache License, Version 2.0",
+            "moduleLicenseUrl": "https://www.apache.org/licenses/LICENSE-2.0"
+        },
+        {
+            "moduleName": "io.netty:netty-transport-native-kqueue",
+            "moduleUrl": "https://netty.io/",
+            "moduleVersion": "4.1.99.Final",
+            "moduleLicense": "Apache License, Version 2.0",
+            "moduleLicenseUrl": "https://www.apache.org/licenses/LICENSE-2.0"
+        },
+        {
+            "moduleName": "io.netty:netty-transport-native-unix-common",
+            "moduleUrl": "https://netty.io/",
+            "moduleVersion": "4.1.99.Final",
+            "moduleLicense": "Apache License, Version 2.0",
+            "moduleLicenseUrl": "https://www.apache.org/licenses/LICENSE-2.0"
+        },
+        {
+            "moduleName": "io.opentelemetry:opentelemetry-api",
+            "moduleUrl": "https://github.com/open-telemetry/opentelemetry-java",
+            "moduleVersion": "1.30.1",
+            "moduleLicense": "Apache License, Version 2.0",
+            "moduleLicenseUrl": "http://www.apache.org/licenses/LICENSE-2.0"
+        },
+        {
+            "moduleName": "io.opentelemetry:opentelemetry-api-events",
+            "moduleUrl": "https://github.com/open-telemetry/opentelemetry-java",
+            "moduleVersion": "1.30.1-alpha",
+            "moduleLicense": "Apache License, Version 2.0",
+            "moduleLicenseUrl": "http://www.apache.org/licenses/LICENSE-2.0"
+        },
+        {
+            "moduleName": "io.opentelemetry:opentelemetry-context",
+            "moduleUrl": "https://github.com/open-telemetry/opentelemetry-java",
+            "moduleVersion": "1.30.1",
+            "moduleLicense": "Apache License, Version 2.0",
+            "moduleLicenseUrl": "http://www.apache.org/licenses/LICENSE-2.0"
+        },
+        {
+            "moduleName": "io.opentelemetry:opentelemetry-extension-incubator",
+            "moduleUrl": "https://github.com/open-telemetry/opentelemetry-java",
+            "moduleVersion": "1.30.1-alpha",
+            "moduleLicense": "Apache License, Version 2.0",
+            "moduleLicenseUrl": "http://www.apache.org/licenses/LICENSE-2.0"
+        },
+        {
+            "moduleName": "io.opentelemetry:opentelemetry-sdk",
+            "moduleUrl": "https://github.com/open-telemetry/opentelemetry-java",
+            "moduleVersion": "1.30.1",
+            "moduleLicense": "Apache License, Version 2.0",
+            "moduleLicenseUrl": "http://www.apache.org/licenses/LICENSE-2.0"
+        },
+        {
+            "moduleName": "io.opentelemetry:opentelemetry-sdk-common",
+            "moduleUrl": "https://github.com/open-telemetry/opentelemetry-java",
+            "moduleVersion": "1.30.1",
+            "moduleLicense": "Apache License, Version 2.0",
+            "moduleLicenseUrl": "http://www.apache.org/licenses/LICENSE-2.0"
+        },
+        {
+            "moduleName": "io.opentelemetry:opentelemetry-sdk-extension-autoconfigure-spi",
+            "moduleUrl": "https://github.com/open-telemetry/opentelemetry-java",
+            "moduleVersion": "1.30.1",
+            "moduleLicense": "Apache License, Version 2.0",
+            "moduleLicenseUrl": "http://www.apache.org/licenses/LICENSE-2.0"
+        },
+        {
+            "moduleName": "io.opentelemetry:opentelemetry-sdk-logs",
+            "moduleUrl": "https://github.com/open-telemetry/opentelemetry-java",
+            "moduleVersion": "1.30.1",
+            "moduleLicense": "Apache License, Version 2.0",
+            "moduleLicenseUrl": "http://www.apache.org/licenses/LICENSE-2.0"
+        },
+        {
+            "moduleName": "io.opentelemetry:opentelemetry-sdk-metrics",
+            "moduleUrl": "https://github.com/open-telemetry/opentelemetry-java",
+            "moduleVersion": "1.30.1",
+            "moduleLicense": "Apache License, Version 2.0",
+            "moduleLicenseUrl": "http://www.apache.org/licenses/LICENSE-2.0"
+        },
+        {
+            "moduleName": "io.opentelemetry:opentelemetry-sdk-trace",
+            "moduleUrl": "https://github.com/open-telemetry/opentelemetry-java",
+            "moduleVersion": "1.30.1",
+            "moduleLicense": "Apache License, Version 2.0",
+            "moduleLicenseUrl": "http://www.apache.org/licenses/LICENSE-2.0"
+        },
+        {
+            "moduleName": "io.projectreactor.netty:reactor-netty-core",
+            "moduleUrl": "https://github.com/reactor/reactor-netty",
+            "moduleVersion": "1.1.11",
+            "moduleLicense": "Apache License, Version 2.0",
+            "moduleLicenseUrl": "http://www.apache.org/licenses/LICENSE-2.0"
+        },
+        {
+            "moduleName": "io.projectreactor.netty:reactor-netty-http",
+            "moduleUrl": "https://github.com/reactor/reactor-netty",
+            "moduleVersion": "1.1.11",
+            "moduleLicense": "Apache License, Version 2.0",
+            "moduleLicenseUrl": "http://www.apache.org/licenses/LICENSE-2.0"
+        },
+        {
+            "moduleName": "io.projectreactor:reactor-core",
+            "moduleUrl": "https://github.com/reactor/reactor-core",
+            "moduleVersion": "3.5.10",
+            "moduleLicense": "Apache License, Version 2.0",
+            "moduleLicenseUrl": "https://www.apache.org/licenses/LICENSE-2.0"
+        },
+        {
+            "moduleName": "net.java.dev.jna:jna",
+            "moduleUrl": "https://github.com/java-native-access/jna",
+            "moduleVersion": "5.13.0",
+            "moduleLicense": "GNU LESSER GENERAL PUBLIC LICENSE, Version 2.1",
+            "moduleLicenseUrl": "https://www.gnu.org/licenses/lgpl-2.1"
+        },
+        {
+            "moduleName": "net.java.dev.jna:jna-platform",
+            "moduleUrl": "https://github.com/java-native-access/jna",
+            "moduleVersion": "5.13.0",
+            "moduleLicense": "GNU LESSER GENERAL PUBLIC LICENSE, Version 2.1",
+            "moduleLicenseUrl": "https://www.gnu.org/licenses/lgpl-2.1"
+        },
+        {
+            "moduleName": "net.minidev:accessors-smart",
+            "moduleUrl": "https://urielch.github.io/",
+            "moduleVersion": "2.4.9",
+            "moduleLicense": "Apache License, Version 2.0",
+            "moduleLicenseUrl": "https://www.apache.org/licenses/LICENSE-2.0"
+        },
+        {
+            "moduleName": "net.minidev:json-smart",
+            "moduleUrl": "https://urielch.github.io/",
+            "moduleVersion": "2.4.10",
+            "moduleLicense": "Apache License, Version 2.0",
+            "moduleLicenseUrl": "https://www.apache.org/licenses/LICENSE-2.0"
+        },
+        {
+            "moduleName": "org.apache.commons:commons-lang3",
+            "moduleUrl": "https://commons.apache.org/proper/commons-lang/",
+            "moduleVersion": "3.12.0",
+            "moduleLicense": "Apache License, Version 2.0",
+            "moduleLicenseUrl": "https://www.apache.org/licenses/LICENSE-2.0"
+        },
+        {
+            "moduleName": "org.apache.commons:commons-text",
+            "moduleUrl": "https://commons.apache.org/proper/commons-text",
+            "moduleVersion": "1.10.0",
+            "moduleLicense": "Apache License, Version 2.0",
+            "moduleLicenseUrl": "https://www.apache.org/licenses/LICENSE-2.0"
+        },
+        {
+            "moduleName": "org.awaitility:awaitility",
+            "moduleUrl": "http://awaitility.org",
+            "moduleVersion": "4.2.0",
+            "moduleLicense": "Apache License, Version 2.0",
+            "moduleLicenseUrl": "https://www.apache.org/licenses/LICENSE-2.0"
+        },
+        {
+            "moduleName": "org.hamcrest:hamcrest",
+            "moduleUrl": "http://hamcrest.org/JavaHamcrest/",
+            "moduleVersion": "2.1",
+            "moduleLicense": "The 3-Clause BSD License",
+            "moduleLicenseUrl": "https://opensource.org/licenses/BSD-3-Clause"
+        },
+        {
+            "moduleName": "org.reactivestreams:reactive-streams",
+            "moduleUrl": "http://www.reactive-streams.org/",
+            "moduleVersion": "1.0.4",
+            "moduleLicense": "MIT-0",
+            "moduleLicenseUrl": "https://spdx.org/licenses/MIT-0.html"
+        },
+        {
+            "moduleName": "org.slf4j:jcl-over-slf4j",
+            "moduleUrl": "http://www.slf4j.org",
+            "moduleVersion": "2.0.9",
+            "moduleLicense": "MIT License",
+            "moduleLicenseUrl": "https://opensource.org/licenses/MIT"
+        },
+        {
+            "moduleName": "org.slf4j:slf4j-api",
+            "moduleUrl": "http://www.slf4j.org",
+            "moduleVersion": "2.0.9",
+            "moduleLicense": "MIT License",
+            "moduleLicenseUrl": "https://opensource.org/licenses/MIT"
+        }
+    ]
+}

@@ -1,0 +1,2 @@
+# Mark test fixture files as generated
+tests/fixtures/* linguist-generated
