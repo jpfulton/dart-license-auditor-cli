@@ -1,5 +1,4 @@
 import fetch from "node-fetch";
-import { parseVersion, VersionParseError } from "./version-parser";
 import { ParsedDependency } from "./yaml-parser";
 
 const PUB_DEV_BASE_URL = "https://pub.dev/packages";
@@ -12,20 +11,19 @@ export class PubDevFetchError extends Error {
 }
 
 /**
- * Fetches the HTML content for a package from pub.dev
+ * Fetches the HTML content for a package version from pub.dev
  * @param packageName The name of the package
- * @param version The version string (can include constraints like ^)
+ * @param version The version of the package
  * @returns The HTML content as a string
- * @throws PubDevFetchError if the fetch fails or version is invalid
+ * @throws PubDevFetchError if the fetch fails
  */
 export async function fetchPackageHtml(
   packageName: string,
   version: string
 ): Promise<string> {
-  try {
-    const cleanVersion = parseVersion(version);
-    const url = `${PUB_DEV_BASE_URL}/${packageName}/versions/${cleanVersion}`;
+  const url = `${PUB_DEV_BASE_URL}/${packageName}/versions/${version}`;
 
+  try {
     const response = await fetch(url);
     if (!response.ok) {
       throw new PubDevFetchError(
@@ -34,11 +32,6 @@ export async function fetchPackageHtml(
     }
     return await response.text();
   } catch (error) {
-    if (error instanceof VersionParseError) {
-      throw new PubDevFetchError(
-        `Invalid version format for ${packageName}: ${error.message}`
-      );
-    }
     throw new PubDevFetchError(
       `Error fetching package info: ${(error as Error).message}`
     );
@@ -46,7 +39,7 @@ export async function fetchPackageHtml(
 }
 
 /**
- * Fetches the HTML content for a package from pub.dev using a ParsedDependency
+ * Fetches the HTML content for a package version from pub.dev using a ParsedDependency
  * @param dependency The parsed dependency object
  * @returns The HTML content as a string
  * @throws PubDevFetchError if the fetch fails or if the dependency is not valid
@@ -54,6 +47,12 @@ export async function fetchPackageHtml(
 export async function fetchPackageHtmlFromDependency(
   dependency: ParsedDependency
 ): Promise<string> {
+  if (dependency.source !== "pub") {
+    throw new PubDevFetchError(
+      `Cannot fetch package info for ${dependency.name}: only pub source dependencies can be fetched`
+    );
+  }
+
   if (!dependency.version) {
     throw new PubDevFetchError(
       `Cannot fetch package info for ${dependency.name}: no version specified`
