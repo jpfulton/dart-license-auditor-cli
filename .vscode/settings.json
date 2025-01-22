@@ -7,6 +7,8 @@
     "source.sortMembers"
   ],
   "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "npm.packageManager": "yarn",
+  "jest.jestCommandLine": "yarn test",
   "cSpell.words": [
     "buildscript",
     "dangerfile",
