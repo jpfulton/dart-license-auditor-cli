@@ -9,10 +9,6 @@ const mockedFs = fs as jest.Mocked<typeof fs>;
 const mockedCwd = jest.spyOn(process, "cwd");
 
 describe("root-project", () => {
-  describe("getCurrentVersionString", () => {
-    // Existing tests for getCurrentVersionString if any...
-  });
-
   describe("getRootProjectName", () => {
     beforeEach(() => {
       jest.clearAllMocks();
