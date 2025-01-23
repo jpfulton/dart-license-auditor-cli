@@ -35,7 +35,7 @@ export async function auditToMarkdown(
   }
   console.log("");
 
-  checkLicenses(
+  await checkLicenses(
     configuration,
     pathToProject,
     metadataMarkdown,

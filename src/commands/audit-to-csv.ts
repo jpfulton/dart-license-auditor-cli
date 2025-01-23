@@ -20,7 +20,7 @@ export async function auditToCsv(
   }
 
   if (options.data) {
-    checkLicenses(
+    await checkLicenses(
       configuration,
       pathToProject,
       metadataCsv,

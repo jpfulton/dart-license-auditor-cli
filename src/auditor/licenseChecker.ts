@@ -6,62 +6,45 @@ import {
   removeDuplicates,
 } from "@jpfulton/license-auditor-common";
 import { existsSync } from "fs";
-import { getRootProjectName, isGradleProject, isMavenProject } from "../util";
+import { fetchPackageHtmlFromDependency } from "../util/pub-dev-fetcher";
 import {
-  convertGradleDependencies,
-  convertMavenDependencies,
-} from "../util/converters";
-import { getDependenciesFromReportFile } from "./gradleParser";
-import {
-  getMavenDependenciesFromRootNode,
-  getReportRootNode,
-} from "./mavenParser.js";
+  convertToDependency,
+  parsePackageHtml,
+} from "../util/pubdev-html-parser";
+import { getAllDependencies, parseYamlFile } from "../util/yaml-parser";
 import { parserFactory } from "./parseLicenses.js";
 
-export const findAllDependencies = (projectPath: string): Dependency[] => {
-  const isMaven = isMavenProject(projectPath);
-  const isGradle = isGradleProject(projectPath);
-
-  if (!isMaven && !isGradle) {
-    throw new Error("The project is not a Maven or Gradle project.");
+export const findAllDependencies = async (
+  projectPath: string
+): Promise<Dependency[]> => {
+  const pubspecPath = `${projectPath}/pubspec.yaml`;
+  if (!existsSync(pubspecPath)) {
+    throw new Error("No pubspec.yaml found in project path.");
   }
 
-  const rootProjectName = getRootProjectName(projectPath);
+  // Parse the pubspec.yaml file
+  const pubspec = parseYamlFile(pubspecPath);
+  const rootProjectName = pubspec.name;
   let dependencies: Dependency[] = [];
 
-  if (isMaven) {
-    let pathToReport = `${projectPath}/target/reports/dependencies.html`;
-    if (!existsSync(pathToReport)) {
-      pathToReport = `${projectPath}/target/site/dependencies.html`;
-      if (!existsSync(pathToReport)) {
-        throw new Error(
-          "No Maven dependencies report found at either modern (/target/reports/) or legacy (/target/site/) paths."
-        );
+  const parsedDependencies = getAllDependencies(pubspec);
+
+  // Fetch and process each dependency
+  for (const dep of parsedDependencies) {
+    try {
+      if (dep.source === "pub" && dep.version) {
+        const html = await fetchPackageHtmlFromDependency(dep);
+        const metadata = parsePackageHtml(html);
+        dependencies.push(convertToDependency(dep, metadata, rootProjectName));
       }
+      // Skip non-pub dependencies for now
+    } catch (error) {
+      console.warn(
+        `Warning: Could not process dependency ${dep.name}: ${
+          (error as Error).message
+        }`
+      );
     }
-
-    const rootNode = getReportRootNode(pathToReport);
-    const mavenDependencies = getMavenDependenciesFromRootNode(rootNode);
-
-    dependencies = convertMavenDependencies(mavenDependencies, rootProjectName);
-  }
-
-  if (isGradle) {
-    let pathToReport = "";
-    if (existsSync(`${projectPath}/build/licenses/licenses.json`)) {
-      pathToReport = `${projectPath}/build/licenses/licenses.json`;
-    } else if (existsSync(`${projectPath}/licenses/licenses.json`)) {
-      pathToReport = `${projectPath}/licenses/licenses.json`;
-    } else {
-      throw new Error("No license report found.");
-    }
-
-    const gradleDependencies = getDependenciesFromReportFile(pathToReport);
-
-    dependencies = convertGradleDependencies(
-      gradleDependencies,
-      rootProjectName
-    );
   }
 
   // remove duplicates
@@ -73,20 +56,20 @@ export const findAllDependencies = (projectPath: string): Dependency[] => {
   return dependencies;
 };
 
-export const checkLicenses = (
+export const checkLicenses = async (
   configuration: Configuration,
   projectPath: string,
   metadataOutputter: MetadataOutputter,
   infoOutputter: DependencyOutputter,
   warnOutputter: DependencyOutputter,
   errorOutputter: DependencyOutputter
-) => {
+): Promise<void> => {
   if (!projectPath) {
     return console.error("No project path provided.");
   }
 
   try {
-    const dependencies = findAllDependencies(projectPath);
+    const dependencies = await findAllDependencies(projectPath);
 
     if (!dependencies || dependencies.length <= 0) {
       return console.error("No dependencies found.");
