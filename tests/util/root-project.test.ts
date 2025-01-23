@@ -1,81 +1,86 @@
-import {
-  getGradleProjectNameFromSettingsFile,
-  getGradleProjectNameFromString,
-  getMavenProjectNameFromPomXml,
-} from "../../src/util/root-project.js";
+import * as fs from "fs";
+import path from "path";
+import * as yaml from "yaml";
+import { getRootProjectName } from "../../src/util/root-project";
 
-describe("getMavenRootProjectNameFromPomXml", () => {
-  it("should return the name of a project from a pom.xml file specified by filename", () => {
-    const filename = "tests/fixtures/pom_snowflakedb-jdbc.xml";
-    const name = getMavenProjectNameFromPomXml(filename);
-    expect(name).toBe("net.snowflake:snowflake-jdbc");
-  });
-});
+// Mock the fs and process modules
+jest.mock("fs");
+const mockedFs = fs as jest.Mocked<typeof fs>;
+const mockedCwd = jest.spyOn(process, "cwd");
 
-describe("getGradleProjectNameFromSettingsFile", () => {
-  it("should return the name of the root project from a settings.gradle file", () => {
-    const filename = "tests/fixtures/settings.gradle.mock";
-    const name = getGradleProjectNameFromSettingsFile(filename);
-    expect(name).toBe("snowflake-jdbc");
-  });
-});
-
-describe("getGradleProjectNameFromString", () => {
-  it("should return the name of the root project using a regex from a string of file contents", () => {
-    const fileContents = `rootProject.name = 'snowflake-jdbc'`;
-    const name = getGradleProjectNameFromString(fileContents);
-    expect(name).toBe("snowflake-jdbc");
+describe("root-project", () => {
+  describe("getCurrentVersionString", () => {
+    // Existing tests for getCurrentVersionString if any...
   });
 
-  it("should return the name of the root project using a regex from a string of file contents", () => {
-    const fileContents = `rootProject.name = "snowflake-jdbc"`;
-    const name = getGradleProjectNameFromString(fileContents);
-    expect(name).toBe("snowflake-jdbc");
-  });
+  describe("getRootProjectName", () => {
+    beforeEach(() => {
+      jest.clearAllMocks();
+      // Set a default mock for process.cwd()
+      mockedCwd.mockReturnValue("/fake/current/directory");
+    });
 
-  it("should handle spaces in the root project name", () => {
-    const fileContents = `rootProject.name = 'snowflake jdbc'`;
-    const name = getGradleProjectNameFromString(fileContents);
-    expect(name).toBe("snowflake jdbc");
-  });
+    it("should return package name from pubspec.yaml when it exists", () => {
+      const mockPubspec = {
+        name: "test_project",
+        description: "A test project",
+        version: "1.0.0",
+      };
 
-  it("should handle multiple lines in the file contents", () => {
-    const fileContents = `some stuff
-    rootProject.name = 'snowflake-jdbc'
-    some other stuff`;
-    const name = getGradleProjectNameFromString(fileContents);
-    expect(name).toBe("snowflake-jdbc");
-  });
+      mockedFs.readFileSync.mockReturnValue(yaml.stringify(mockPubspec));
 
-  it("should handle multiple lines and address a case where two rootProject.name lines exist", () => {
-    const fileContents = `some stuff
-    rootProject.name = 'snowflake-jdbc'
-    some other stuff
-    rootProject.name = 'snowflake-jdbc2'
-    some other stuff`;
-    const name = getGradleProjectNameFromString(fileContents);
-    expect(name).toBe("snowflake-jdbc");
-  });
+      const result = getRootProjectName();
+      expect(result).toBe("test_project");
+      expect(mockedFs.readFileSync).toHaveBeenCalledWith(
+        path.join(process.cwd(), "pubspec.yaml"),
+        expect.any(String)
+      );
+    });
 
-  it("should throw an error if the project name cannot be found", () => {
-    const fileContents = `rootProject.name = ''`;
-    expect(() => getGradleProjectNameFromString(fileContents)).toThrow();
-  });
+    it("should use provided path when specified", () => {
+      const mockPubspec = {
+        name: "mono_repo_project",
+        description: "A project in a monorepo",
+        version: "1.0.0",
+      };
 
-  it("should throw an error if the project name cannot be found", () => {
-    const fileContents = `rootProject.name = ""`;
-    expect(() => getGradleProjectNameFromString(fileContents)).toThrow();
-  });
+      mockedFs.readFileSync.mockReturnValue(yaml.stringify(mockPubspec));
 
-  it("should throw an error if the project name cannot be found", () => {
-    const fileContents = `rootProject.name =`;
-    expect(() => getGradleProjectNameFromString(fileContents)).toThrow();
-  });
+      const customPath = "/custom/project/path";
+      const result = getRootProjectName(customPath);
 
-  it("should throw an error if the project name cannot be found in a multiline file", () => {
-    const fileContents = `some stuff
-    some other stuff
-    still more stuff`;
-    expect(() => getGradleProjectNameFromString(fileContents)).toThrow();
+      expect(result).toBe("mono_repo_project");
+      expect(mockedFs.readFileSync).toHaveBeenCalledWith(
+        path.join(customPath, "pubspec.yaml"),
+        expect.any(String)
+      );
+    });
+
+    it("should fallback to directory name when pubspec.yaml doesn't exist", () => {
+      mockedFs.readFileSync.mockImplementation(() => {
+        throw new Error("File not found");
+      });
+
+      const result = getRootProjectName();
+      expect(result).toBe("directory"); // basename of /fake/current/directory
+    });
+
+    it("should fallback to directory name when pubspec.yaml is invalid", () => {
+      mockedFs.readFileSync.mockReturnValue("invalid: yaml: content:");
+
+      const result = getRootProjectName();
+      expect(result).toBe("directory");
+    });
+
+    it("should use basename of custom path when pubspec.yaml doesn't exist in specified path", () => {
+      mockedFs.readFileSync.mockImplementation(() => {
+        throw new Error("File not found");
+      });
+
+      const customPath = "/custom/project/my-dart-app";
+      const result = getRootProjectName(customPath);
+
+      expect(result).toBe("my-dart-app");
+    });
   });
 });

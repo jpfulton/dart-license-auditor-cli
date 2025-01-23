@@ -23,7 +23,7 @@ export async function auditToMarkdown(
 
   console.log(`> Generated at ${new Date().toUTCString()} <br />`);
   console.log(
-    `> Generated using version ${version} of java-license-auditor-cli. <br />`
+    `> Generated using version ${version} of dart-license-auditor-cli. <br />`
   );
   console.log(
     `> Configuration source used: ${configuration.configurationSource} <br />`

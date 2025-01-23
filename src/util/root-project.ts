@@ -1,4 +1,6 @@
-import { existsSync, readFileSync } from "fs";
+import { readFileSync } from "fs";
+import path from "path";
+import { parseYamlFile } from "./yaml-parser";
 
 // return the version string from this module's package.json
 export function getCurrentVersionString() {
@@ -15,94 +17,22 @@ export function getCurrentVersionString() {
   }
 }
 
-// return true if the root project is a maven project
-// this can be determined by the existence of a pom.xml file
-// in the root directory
-export const isMavenProject = (pathToProject: string) => {
-  if (existsSync(`${pathToProject}/pom.xml`)) {
-    return true;
-  } else {
-    return false;
+/**
+ * Get the root project name from a Dart/Flutter project.
+ * Primary method: Parse the pubspec.yaml file to get the official package name.
+ * Fallback method: Use the directory name if pubspec.yaml doesn't exist or can't be parsed.
+ * @param pathToProject Optional path to the Dart/Flutter project root. If not provided, uses current working directory.
+ * @returns The project name
+ */
+export function getRootProjectName(pathToProject?: string): string {
+  const projectPath = pathToProject ?? process.cwd();
+
+  try {
+    const pubspecPath = path.join(projectPath, "pubspec.yaml");
+    const pubspec = parseYamlFile(pubspecPath);
+    return pubspec.name;
+  } catch (e) {
+    // Fallback to directory name if pubspec.yaml doesn't exist or can't be parsed
+    return path.basename(projectPath);
   }
-};
-
-// return true if the root project is a gradle project
-// this can be determined by the existence of a build.gradle or build.gradle.kts file
-// in the root directory
-export const isGradleProject = (pathToProject: string) => {
-  if (
-    existsSync(`${pathToProject}/build.gradle`) ||
-    existsSync(`${pathToProject}/build.gradle.kts`)
-  ) {
-    return true;
-  } else {
-    return false;
-  }
-};
-
-// return the name of the root project
-export const getRootProjectName = (pathToProject: string) => {
-  if (isMavenProject(pathToProject)) {
-    return getMavenProjectNameFromPomXml(`${pathToProject}/pom.xml`);
-  } else if (isGradleProject(pathToProject)) {
-    return getGradleProjectName(pathToProject);
-  } else {
-    throw new Error(
-      "Could not determine root project name. Only maven and gradle projects are supported."
-    );
-  }
-};
-
-// return the name of a project from a pom.xml file
-// specified by filename
-export const getMavenProjectNameFromPomXml = (filename: string) => {
-  const pomXml = getFileContents(filename);
-  const artifactId = pomXml.match(/<artifactId>(.*)<\/artifactId>/)?.[1] ?? "";
-  const groupId = pomXml.match(/<groupId>(.*)<\/groupId>/)?.[1] ?? "";
-  const name = `${groupId}:${artifactId}`;
-  return name;
-};
-
-// return the contents of a file specified by filename as a string
-export const getFileContents = (filename: string) => {
-  return readFileSync(filename).toString();
-};
-
-// pull the project name for a gradle project
-// this can be found in either the settings.gradle or settings.gradle.kts file
-export const getGradleProjectName = (pathToProject: string) => {
-  const settingsGradle = `${pathToProject}/settings.gradle`;
-  const settingsGradleKts = `${pathToProject}/settings.gradle.kts`;
-
-  if (existsSync(settingsGradle)) {
-    return getGradleProjectNameFromSettingsFile(settingsGradle);
-  } else if (existsSync(settingsGradleKts)) {
-    return getGradleProjectNameFromSettingsFile(settingsGradleKts);
-  } else {
-    throw new Error(
-      "Could not determine root project name for Gradle project. settings.gradle or settings.gradle.kts must be present."
-    );
-  }
-};
-
-export const getGradleProjectNameFromSettingsFile = (filename: string) => {
-  const settingsGradleKts = getFileContents(filename);
-  const name = getGradleProjectNameFromString(settingsGradleKts);
-  return name;
-};
-
-// return the name of the root project using a regex from a string
-// of file contents, the file contents will include a line like:
-// rootProject.name = 'snowflake-jdbc' or rootProject.name = "snowflake-jdbc"
-export const getGradleProjectNameFromString = (fileContents: string) => {
-  const name =
-    fileContents.match(/rootProject.name\s*=\s*['"](.*)['"]/)?.[1] ?? "";
-
-  if (name === "") {
-    throw new Error(
-      "Could not determine root project name for Gradle project. rootProject.name must be present in settings.gradle or settings.gradle.kts."
-    );
-  }
-
-  return name;
-};
+}
