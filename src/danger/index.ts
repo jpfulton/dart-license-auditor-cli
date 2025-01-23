@@ -1,5 +1,5 @@
 import type { IPluginConfig } from "./danger-plugin.js";
-import { javaLicenseAuditor } from "./danger-plugin.js";
+import { dartLicenseAuditor } from "./danger-plugin.js";
 
-export { javaLicenseAuditor };
+export { dartLicenseAuditor };
 export type { IPluginConfig };
