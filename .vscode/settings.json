@@ -9,6 +9,7 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "npm.packageManager": "yarn",
   "jest.jestCommandLine": "yarn test",
+  "jest.runMode": "on-demand",
   "cSpell.words": [
     "buildscript",
     "dangerfile",
