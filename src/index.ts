@@ -1,2 +1,2 @@
-export { javaLicenseAuditor } from "./danger";
+export { dartLicenseAuditor } from "./danger";
 export type { IPluginConfig } from "./danger";

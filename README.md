@@ -43,11 +43,11 @@ to avoid the need to copy the configuration file to each project and maintain th
 in multiple places.
 
 ```bash
-dart-license-auditor-cli csv --remote-config https://raw.githubusercontent.com/jpfulton/dart-license-auditor-cli/main/.license-checker.json . > report.csv
+dart-license-auditor-cli csv --remote-config https://raw.githubusercontent.com/jpfulton/jpfulton-license-audits/main/.license-checker.json . > report.csv
 ```
 
 ```bash
-dart-license-auditor-cli markdown --remote-config https://raw.githubusercontent.com/jpfulton/dart-license-auditor-cli/main/.license-checker.json . > report.md
+dart-license-auditor-cli markdown --remote-config https://raw.githubusercontent.com/jpfulton/jpfulton-license-audits/main/.license-checker.json . > report.md
 ```
 
 ## Usage as a DangerJS Plugin

@@ -1,4 +1,5 @@
 import fetch from "node-fetch";
+import { parseVersion } from "./version-parser";
 import { ParsedDependency } from "./yaml-parser";
 
 const PUB_DEV_BASE_URL = "https://pub.dev/packages";
@@ -21,17 +22,20 @@ export async function fetchPackageHtml(
   packageName: string,
   version: string
 ): Promise<string> {
-  const url = `${PUB_DEV_BASE_URL}/${packageName}/versions/${version}`;
+  const cleanVersion = parseVersion(version);
+  const url = `${PUB_DEV_BASE_URL}/${packageName}/versions/${cleanVersion}`;
 
   try {
     const response = await fetch(url);
     if (!response.ok) {
+      console.error(`Failed to fetch from ${url} - Status: ${response.status}`);
       throw new PubDevFetchError(
         `Failed to fetch package info. Status: ${response.status}`
       );
     }
     return await response.text();
   } catch (error) {
+    console.error(`Error fetching from ${url}: ${(error as Error).message}`);
     throw new PubDevFetchError(
       `Error fetching package info: ${(error as Error).message}`
     );
