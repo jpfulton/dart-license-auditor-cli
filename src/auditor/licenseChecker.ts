@@ -6,12 +6,13 @@ import {
   removeDuplicates,
 } from "@jpfulton/license-auditor-common";
 import { existsSync } from "fs";
-import { fetchPackageHtmlFromDependency } from "../util/pub-dev-fetcher";
 import {
   convertToDependency,
+  fetchPackageHtmlFromDependency,
+  getAllDependencies,
   parsePackageHtml,
-} from "../util/pubdev-html-parser";
-import { getAllDependencies, parseYamlFile } from "../util/yaml-parser";
+  parseYamlFile,
+} from "../util";
 import { parserFactory } from "./parseLicenses.js";
 
 export const findAllDependencies = async (
