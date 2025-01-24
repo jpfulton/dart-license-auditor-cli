@@ -62,11 +62,11 @@ yarn add -D danger @jpfulton/dart-license-auditor-cli
 Then, add the following to your `dangerfile.ts`:
 
 ```typescript
-import { licenseAuditor } from "@jpfulton/dart-license-auditor-cli";
+import { dartLicenseAuditor } from "@jpfulton/dart-license-auditor-cli";
 
 export default async () => {
   // Run the license auditor plugin
-  await licenseAuditor({
+  await dartLicenseAuditor({
     // optionally choose to fail the build if a blacklisted license is found
     failOnBlacklistedLicense: false,
     // specify the path to the project's pubspec.yaml file, useful in a monorepo
