@@ -1,0 +1,21 @@
+{
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": [
+    "source.fixAll",
+    "source.organizeImports",
+    "source.sortMembers"
+  ],
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "npm.packageManager": "yarn",
+  "jest.jestCommandLine": "yarn test",
+  "jest.runMode": "on-demand",
+  "cSpell.words": [
+    "buildscript",
+    "dangerfile",
+    "filedirname",
+    "gradlew",
+    "Outputter",
+    "outputters"
+  ]
+}
