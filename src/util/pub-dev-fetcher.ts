@@ -65,3 +65,34 @@ export async function fetchPackageHtmlFromDependency(
 
   return fetchPackageHtml(dependency.name, dependency.version);
 }
+
+/**
+ * Fetches the license HTML content for a package version from pub.dev
+ * @param packageName The name of the package
+ * @param version The version of the package
+ * @returns The HTML content as a string
+ * @throws PubDevFetchError if the fetch fails
+ */
+export async function fetchLicenseHtml(
+  packageName: string,
+  version: string
+): Promise<string> {
+  const cleanVersion = parseVersion(version);
+  const url = `${PUB_DEV_BASE_URL}/${packageName}/versions/${cleanVersion}/license`;
+
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      console.error(`Failed to fetch from ${url} - Status: ${response.status}`);
+      throw new PubDevFetchError(
+        `Failed to fetch license info. Status: ${response.status}`
+      );
+    }
+    return await response.text();
+  } catch (error) {
+    console.error(`Error fetching from ${url}: ${(error as Error).message}`);
+    throw new PubDevFetchError(
+      `Error fetching license info: ${(error as Error).message}`
+    );
+  }
+}

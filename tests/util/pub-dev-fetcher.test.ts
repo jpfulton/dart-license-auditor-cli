@@ -1,5 +1,6 @@
 import fetch, { Response } from "node-fetch";
 import {
+  fetchLicenseHtml,
   fetchPackageHtml,
   fetchPackageHtmlFromDependency,
 } from "../../src/util/pub-dev-fetcher";
@@ -115,6 +116,46 @@ describe("pub-dev-fetcher", () => {
         "Cannot fetch package info for test_package: only pub source dependencies can be fetched"
       );
       expect(mockedFetch).not.toHaveBeenCalled();
+    });
+  });
+
+  describe("fetchLicenseHtml", () => {
+    it("should fetch license HTML for a valid package version", async () => {
+      const mockHtml = "<html><body>License content</body></html>";
+      mockedFetch.mockResolvedValueOnce({
+        ok: true,
+        text: () => Promise.resolve(mockHtml),
+        status: 200,
+        statusText: "OK",
+      } as Response);
+
+      const html = await fetchLicenseHtml("test_package", "1.0.0");
+
+      // Verify the correct URL was called
+      expect(mockedFetch).toHaveBeenCalledWith(
+        "https://pub.dev/packages/test_package/versions/1.0.0/license"
+      );
+      expect(html).toBe(mockHtml);
+    });
+
+    it("should handle 404 responses", async () => {
+      mockedFetch.mockResolvedValueOnce({
+        ok: false,
+        status: 404,
+        statusText: "Not Found",
+      } as Response);
+
+      await expect(fetchLicenseHtml("nonexistent", "1.0.0")).rejects.toThrow(
+        "Failed to fetch license info. Status: 404"
+      );
+    });
+
+    it("should handle network errors", async () => {
+      mockedFetch.mockRejectedValueOnce(new Error("Network error"));
+
+      await expect(fetchLicenseHtml("test_package", "1.0.0")).rejects.toThrow(
+        "Error fetching license info: Network error"
+      );
     });
   });
 });

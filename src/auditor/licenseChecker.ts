@@ -35,7 +35,7 @@ export const findAllDependencies = async (
     try {
       if (dep.source === "pub" && dep.version) {
         const html = await fetchPackageHtmlFromDependency(dep);
-        const metadata = parsePackageHtml(html);
+        const metadata = await parsePackageHtml(html, dep.name, dep.version);
         dependencies.push(convertToDependency(dep, metadata, rootProjectName));
       }
       // Skip non-pub dependencies for now

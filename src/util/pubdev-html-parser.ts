@@ -1,5 +1,6 @@
 import { Dependency } from "@jpfulton/license-auditor-common";
 import { parse as parseHtml } from "node-html-parser";
+import { fetchLicenseHtml } from "./pub-dev-fetcher";
 import { ParsedDependency } from "./yaml-parser";
 
 export interface PubDevMetadata {
@@ -22,10 +23,16 @@ export class PubDevParseError extends Error {
 /**
  * Parse pub.dev HTML content to extract package metadata
  * @param html The HTML content from pub.dev
+ * @param packageName The name of the package (required for fetching license info if needed)
+ * @param version The version of the package (required for fetching license info if needed)
  * @returns Extracted metadata including license, publisher, repository URL, etc.
  * @throws PubDevParseError if required metadata cannot be found
  */
-export function parsePackageHtml(html: string): PubDevMetadata {
+export async function parsePackageHtml(
+  html: string,
+  packageName: string,
+  version: string
+): Promise<PubDevMetadata> {
   const root = parseHtml(html);
   const metadata: PubDevMetadata = {
     license: { type: "", url: "" },
@@ -53,6 +60,21 @@ export function parsePackageHtml(html: string): PubDevMetadata {
         licenseLink.getAttribute("href") || "",
         "https://pub.dev"
       ).toString();
+
+      // If license type is unknown, try to get it from the license page
+      if (metadata.license.type.toLowerCase() === "unknown") {
+        try {
+          const licenseHtml = await fetchLicenseHtml(packageName, version);
+          metadata.license.type = parseLicenseHtml(licenseHtml);
+        } catch (error) {
+          console.warn(
+            `Failed to fetch license text for ${packageName}@${version}: ${
+              (error as Error).message
+            }`
+          );
+          // Keep the "unknown" type if we can't fetch the license text
+        }
+      }
     }
   } else {
     throw new PubDevParseError("Could not find license information");
@@ -130,4 +152,37 @@ export function convertToDependency(
     publisher: metadata.publisher || "",
     repository: metadata.repository || "",
   };
+}
+
+/**
+ * Parse the license HTML content from pub.dev to extract the first line of the license text
+ * @param html The HTML content from the pub.dev license page
+ * @returns The first line of the license text
+ * @throws PubDevParseError if the license text cannot be found
+ */
+export function parseLicenseHtml(html: string): string {
+  const root = parseHtml(html);
+
+  // Find the pre element containing the license text using a specific selector
+  const preElement = root.querySelector(
+    "section.tab-content.detail-tab-license-content .highlight pre"
+  );
+  if (!preElement) {
+    throw new PubDevParseError("Could not find license text");
+  }
+
+  // Get the text content and split into lines
+  const text = preElement.text.trim();
+  if (!text) {
+    throw new PubDevParseError("Could not find license text");
+  }
+
+  // Get the first non-empty line
+  const lines = text.split("\n");
+  const firstLine = lines.find((line) => line.trim().length > 0);
+  if (!firstLine) {
+    throw new PubDevParseError("Could not find license text");
+  }
+
+  return firstLine.trim();
 }
