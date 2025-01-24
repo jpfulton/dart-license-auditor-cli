@@ -1,6 +1,6 @@
 {
   "name": "@jpfulton/dart-license-auditor-cli",
-  "version": "0.0.12",
+  "version": "0.0.1",
   "description": "A CLI for listing and auditing Dart project dependencies.",
   "keywords": [
     "dart",
